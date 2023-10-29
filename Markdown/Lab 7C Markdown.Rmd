@@ -1,4 +1,10 @@
+---
+title: "Untitled"
+output: html_document
+date: "2023-10-29"
+---
 
+```{r STEP 1}
 .libPaths()
 lapply(.libPaths(), list.files)
 
@@ -88,11 +94,23 @@ if (require("RColorBrewer")) {
   install.packages("RColorBrewer", dependencies = TRUE,
                    repos = "https://cloud.r-project.org")
 }
+## caret ----
+if (require("caret")) {
+  require("caret")
+} else {
+  install.packages("caret", dependencies = TRUE,
+                   repos = "https://cloud.r-project.org")
+}
+## rpart ----
+if (require("rpart")) {
+  require("rpart")
+} else {
+  install.packages("rpart", dependencies = TRUE,
+                   repos = "https://cloud.r-project.org")
+}
+```
 
-library(readr)
-train <- read_csv("data/train.csv")
-View(train)
-# Load the "train.csv" dataset
+```{r STEP 2}
 data <- read_csv("data/train.csv")
 
 # Data Preprocessing
@@ -131,7 +149,8 @@ predictions <- predict(segmentation_model_rpart,
 confusion_matrix <- confusionMatrix(predictions, testData$Segmentation)
 print(confusion_matrix)
 
-# Visualize the confusion matrix
-fourfoldplot(as.table(confusion_matrix$confusion), color = c("grey", "lightblue"),
-             main = "Confusion Matrix")
+```
+
+
+
 
